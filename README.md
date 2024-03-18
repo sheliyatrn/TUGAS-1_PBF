@@ -121,7 +121,7 @@ Kita akan membuat 2 views, yaitu page header dan footer.
 
 1. Header
    Buat file header di `app/Views/templates/header.php` dan isikan kode berikut :
-   ```shell
+```shell
    <!doctype html>
 <html>
 
@@ -294,7 +294,7 @@ class NewsModel extends Model
   ```
 
 2. Tambahkan Method `NewsModel::getNews()` pada `app/Models`
-   ```shell
+```
   public function getNews($slug = false)
     {
         if ($slug === false) {
@@ -303,7 +303,7 @@ class NewsModel extends Model
 
         return $this->where(['slug' => $slug])->first();
     }
-     ```
+ ```
      
 ## **Menampilkan news**
 1. Menambahkan Routing
@@ -352,8 +352,7 @@ class News extends BaseController
 ```
 
 3. Lengkapi Method News::index() dengan kode berikut
-   
-   ```php
+```
    <?php
 
 namespace App\Controllers;
@@ -377,11 +376,10 @@ class News extends BaseController
     }
 
     // ...
-   ```
+```
 
 4. Membuat tampilan untuk `app/Views/news/index.php`
-
-```php
+```
 <h2><?= esc($title) ?></h2>
 
 <?php if (! empty($news) && is_array($news)): ?>
@@ -407,8 +405,7 @@ class News extends BaseController
 ```
 
 5. Tambahkan Method `News::show()` pada `app/controllers/News.php`
-   
-   ```php
+   ```
  public function show($slug = null)
     {
         $model = model(NewsModel::class);
@@ -425,11 +422,10 @@ class News extends BaseController
             . view('news/view')
             . view('templates/footer');
     }
-   ```
+```
 
 6. Buat tampilan news di `app/Views/news/view.php`
-
-```php
+```
 //menamplkan judul berita
 <h2><?= esc($news['title']) ?></h2>
 
@@ -477,9 +473,8 @@ $routes->get('(:segment)', [Pages::class, 'view']);
 - Buat file view news
 Buat file baru di app/Views/news/create.php:
 
-```php
+```shell
 <h2><?= esc($title) ?></h2>
-
 <!-- fungsi yang digunakan untuk menampilkan kesalahan terkait perlindungan CSRF kepada pengguna.  -->
 <?= session()->getFlashdata('error') ?>
 <!-- fungsi yang disediakan oleh Form Helper digunakan untuk melaporkan kesalahan terkait validasi form. -->
@@ -507,7 +502,7 @@ Buat file baru di app/Views/news/create.php:
   Tambahkan **`News::new()`** pada `app/controllers/News.php`untuk Menampilkan Formulir.
    Pertama, buatlah metode untuk menampilkan form HTML yang telah buat.
 
-```php
+```
 <?php
 
 namespace App\Controllers;
@@ -568,8 +563,7 @@ class News extends BaseController
 
 4. Success page
    Buat tampilan di `app/Views/news/success.php` dan tulis pesan sukses.
-   
-```php
+```
 <p>News item created successfully.</p>
 ```
 
