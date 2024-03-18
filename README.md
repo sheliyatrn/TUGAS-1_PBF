@@ -32,6 +32,9 @@ Ketikan perintah berikut untuk mendownload dan menginstal Codeigniter 4:
 ```shell
 $ composer create-project codeigniter4/appstarter nama-projek
 ```
+![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/3a56d43f-c0e8-4781-9159-c0e0de0d663d)
+
+2. Perintah di atas akan menghasilkan sebuah project Codeigniter 4 dengan nama ci4app. Proses tersebut dipengaruhi oleh internet, jadi cepat atau
 
 
 ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/eb5ae87b-c8e8-4308-b3b3-f706ace19e17)
