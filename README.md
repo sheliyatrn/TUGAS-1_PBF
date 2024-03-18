@@ -73,10 +73,11 @@ Melakukan konfigurasi database pada project dapat dengan melalui file `app/Confi
 
 # Bangun Aplikasi Pertama
 ### Eror
+
 ## **Static Pages**
 ### **Setting Routing**
 Buka file route yang berlokasi di `app/Config/Routes.php` yang berisi
-```php
+```shell
 <?php
 
 use CodeIgniter\Router\RouteCollection;
@@ -86,13 +87,88 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 ```
-Tambahkan baris berikut, setelah arahan rute untuk '/' , untuk menyambungkan dengan `Pages.php. yang akan dibuat di Controllers
-```php
+Tambahkan baris berikut, setelah arahan rute untuk '/' , untuk menyambungkan dengan `Pages.php. yang akan dibuat di Controllers.
+```shell
 use App\Controllers\Pages;
 
 $routes->get('pages', [Pages::class, 'index']);
 $routes->get('(:segment)', [Pages::class, 'view']);
 ```
+### **Membuat Controller**
+#### **Membuat Page Controller**
+Buat file pages controllers di folder `app/Controllers/Pages.php` dengan kode berikut.
+```shell
+<?php
 
+namespace App\Controllers;
+
+class Pages extends BaseController
+{
+   //http://localhost:8080/pages menampilkan index() welcome_message
+    public function index()
+    {
+        return view('welcome_message');
+    }
+
+    public function view($page = 'home')
+    {
+        // ...
+    }
+}
+```
+
+#### **Membuat Views**
+Kita akan membuat 2 views, yaitu page header dan footer.
+
+1. Header
+   Buat file header di `app/Views/templates/header.php` dan isikan kode berikut :
+   ```shell
+   <!doctype html>
+<html>
+
+<head>
+    <title>Tutorial CodeIgniter</title>
+</head>
+
+<body>
+
+    <h1><?= esc($title) ?></h1>
+    <!-- esc fungsi global yang disediakan oleh CodeIgniter untuk membantu mencegah serangan XSS -->
+```
+Header berisi kode HTML dasar yang ingin di tampilkan sebelum memuat tampilan utama, bersama dengan judul,serta menampilkan $title variabel, yang akan kita definisikan nanti di controller. Berikut tampilan header
+
+2. Footer
+   Buat file footer di `app/Views/templates/footer.php` dan isikan kode berikut :
+``shell
+<em>&copy; 2024</em>
+</body>
+
+</html>
+```
+### **Menambah Logika Controller**
+#### **Membuat home.php & about.php**
+Tambahkan folder `pages` di `app/Views/` lalu tambahkan dua file bernama `home.php` dan `about.php` pada `app/Views/pages/`.
+
+1. File `home.php` isi kode berikut :
+```shell
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+
+<body>
+    <h1>Selamat datang di Home Page</h1>
+</body>
+
+</html>
+```
+2. File `about.php` isi kode berikut :
+```shell
+
+```
 
 
