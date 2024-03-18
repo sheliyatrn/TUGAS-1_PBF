@@ -291,7 +291,7 @@ class NewsModel extends Model
         return $this->where(['slug' => $slug])->first();
     }
 }
-```
+  ```
 
 2. Tambahkan Method `NewsModel::getNews()` pada `app/Models`
    ```shell
@@ -303,14 +303,14 @@ class NewsModel extends Model
 
         return $this->where(['slug' => $slug])->first();
     }
-   ```
-### **Menampilkan News**
+     ```
+     
+## **Menampilkan news**
 1. Menambahkan Routing
   Ubah file `app/Config/Routes.php` , sehingga terlihat seperti berikut:
 
 ```php
 <?php
-
 // ...
 
 use App\Controllers\News; // tambahkan baris ini
@@ -352,6 +352,7 @@ class News extends BaseController
 ```
 
 3. Lengkapi Method News::index() dengan kode berikut
+   
    ```php
    <?php
 
@@ -379,6 +380,7 @@ class News extends BaseController
    ```
 
 4. Membuat tampilan untuk `app/Views/news/index.php`
+
 ```php
 <h2><?= esc($title) ?></h2>
 
@@ -405,6 +407,7 @@ class News extends BaseController
 ```
 
 5. Tambahkan Method `News::show()` pada `app/controllers/News.php`
+   
    ```php
  public function show($slug = null)
     {
@@ -425,6 +428,7 @@ class News extends BaseController
    ```
 
 6. Buat tampilan news di `app/Views/news/view.php`
+
 ```php
 //menamplkan judul berita
 <h2><?= esc($news['title']) ?></h2>
@@ -452,10 +456,10 @@ public $methods = [
 2. Menambahkan Routing Rules
    Menambahkan rule tambahan ke file `app/Config/Routes.php`.
    
-   ```shell
+```shell
    <?php
+   
 // ...
-
 use App\Controllers\News;
 use App\Controllers\Pages;
 
@@ -466,7 +470,7 @@ $routes->get('news/(:segment)', [News::class, 'show']);
 
 $routes->get('pages', [Pages::class, 'index']);
 $routes->get('(:segment)', [Pages::class, 'view']);
-  ```
+```
 
 3. Buat Form
 
@@ -560,7 +564,7 @@ class News extends BaseController
             . view('news/success')
             . view('templates/footer');
     }
-```
+    ```
 
 4. Success page
    Buat tampilan di `app/Views/news/success.php` dan tulis pesan sukses.
@@ -595,11 +599,21 @@ class NewsModel extends Model
 ```
 
 6. Tampilan create news
+   
 ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/bf195f13-9d25-4127-a660-68cefdb4e16b)
+
 lalu klik button create new news item
 
-7. Tampilan Success page
+8. Tampilan Success page
+   
 ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/598cf690-4348-457a-9e5a-66253c525c27)
+## General Topic
+### **Error Handling**
+Secara default, CodeIgniter akan menampilkan laporan kesalahan terperinci dengan semua kesalahan di lingkungan developmentdan testing.
+
+![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/63d6f4e8-b1e5-4847-ad6a-1917b104267e)
+
+![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/c01b942e-3a17-45fc-9e2d-60f6f59b8828)
 
 
 
