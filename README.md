@@ -72,7 +72,6 @@ Melakukan konfigurasi database pada project dapat dengan melalui file `app/Confi
    ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/b0614a45-6043-40ed-b40e-4370e29282d0) -> ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/0251a323-9ce5-49a7-844c-c880bd54c97c)
 
 ## Bangun Aplikasi Pertama
-### Eror
 
 ## Static Pages
 #### **Setting Routing**
@@ -437,9 +436,171 @@ class News extends BaseController
 7. Tampilan
 Buka file news pada browser `localhost:8080/news`
 ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/b73fe156-8767-439d-9dd7-7256e0af972b)
-
 view artikel salah satu berita
 ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/ca89b880-57f5-4ca7-87f1-397b30ac6afd)
+
+## Create News Item
+1. Buat CSRF Filter
+   Buka file `app/Config/Filters.php` dan perbarui `$methods` properti seperti berikut:
+   
+```php
+public $methods = [
+        'post' => ['csrf'],
+    ];
+```
+
+2. Menambahkan Routing Rules
+   Menambahkan rule tambahan ke file `app/Config/Routes.php`.
+   
+   ```shell
+   <?php
+// ...
+
+use App\Controllers\News;
+use App\Controllers\Pages;
+
+$routes->get('news', [News::class, 'index']);
+$routes->get('news/new', [News::class, 'new']); // Add this line
+$routes->post('news', [News::class, 'create']); // Add this line
+$routes->get('news/(:segment)', [News::class, 'show']);
+
+$routes->get('pages', [Pages::class, 'index']);
+$routes->get('(:segment)', [Pages::class, 'view']);
+  ```
+
+3. Buat Form
+
+- Buat file view news
+Buat file baru di app/Views/news/create.php:
+
+```php
+<h2><?= esc($title) ?></h2>
+
+<!-- fungsi yang digunakan untuk menampilkan kesalahan terkait perlindungan CSRF kepada pengguna.  -->
+<?= session()->getFlashdata('error') ?>
+<!-- fungsi yang disediakan oleh Form Helper digunakan untuk melaporkan kesalahan terkait validasi form. -->
+<?= validation_list_errors() ?>
+
+<form action="/news" method="post">
+
+    <!-- membantu melindungi aplikasi dari serangan CSRF. -->
+    <?= csrf_field() ?>
+
+    <label for="title">Title</label>
+    <input type="input" name="title" value="<?= set_value('title') ?>">
+    <br>
+
+    <label for="body">Text</label>
+    <!-- set_value() fungsi yang disediakan oleh Form Helper digunakan untuk menampilkan data masukan lama ketika terjadi kesalahan. -->
+    <textarea name="body" cols="45" rows="4"><?= set_value('body') ?></textarea>
+    <br>
+
+    <input type="submit" name="submit" value="Create news item">
+</form>
+```
+
+- News Controller
+  Tambahkan **`News::new()`** pada `app/controllers/News.php`untuk Menampilkan Formulir.
+   Pertama, buatlah metode untuk menampilkan form HTML yang telah buat.
+
+```php
+<?php
+
+namespace App\Controllers;
+
+use App\Models\NewsModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
+class News extends BaseController
+{
+		// ... 
+    public function new()
+    {
+        helper('form');
+
+        return view('templates/header', ['title' => 'Create a news item'])
+            . view('news/create')
+            . view('templates/footer');
+    }
+    // ...
+}
+```
+
+- Tambahkan `News::create()` pada `app/controllers/News.php` untuk Membuat Items Berita
+  
+```php
+// Create News Item
+    public function create()
+    {
+        helper('form'); //Memanggil helper form
+
+        $data = $this->request->getPost(['title', 'body']); // mengambil data dari form
+
+        // mengecek atau memvalidasi
+        if (! $this->validateData($data, [
+            'title' => 'required|max_length[255]|min_length[3]',
+            'body'  => 'required|max_length[5000]|min_length[10]',
+        ])) {
+            // JIka validasi gagal akan kembali ke form.
+            return $this->new();
+        }
+
+        // Mengambil data yang telah tervalidasi
+        $post = $this->validator->getValidated();
+
+        $model = model(NewsModel::class);
+
+        //menyimpan ke db
+        $model->save([
+            'title' => $post['title'],
+            'slug'  => url_title($post['title'], '-', true),
+            'body'  => $post['body'],
+        ]);
+
+        return view('templates/header', ['title' => 'Create a news item'])
+            . view('news/success')
+            . view('templates/footer');
+    }
+```
+
+4. Success page
+   Buat tampilan di `app/Views/news/success.php` dan tulis pesan sukses.
+   
+```php
+<p>News item created successfully.</p>
+```
+
+5. Edit `NewsModel` menjadi
+   
+```php
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class NewsModel extends Model
+{
+    protected $table = 'news';
+    protected $allowedFields = ['title', 'slug', 'body'];
+
+    public function getNews($slug = false)
+    {
+        if ($slug === false) {
+            return $this->findAll();
+        }
+
+        return $this->where(['slug' => $slug])->first();
+    }
+}
+```
+
+6. Tampilan create news
+![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/bf195f13-9d25-4127-a660-68cefdb4e16b)
+lalu klik button create new news item
+
+7. Tampilan Success page
+![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/598cf690-4348-457a-9e5a-66253c525c27)
+
 
 
 
