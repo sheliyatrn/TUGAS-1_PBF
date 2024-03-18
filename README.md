@@ -15,10 +15,10 @@ Ekstrak file .zip tersebut pada direktori root web server kita. Jika menggunakan
 
 4. Untuk menjalankan Codeigniter 4 kamu harus menggunakan terminal dan masuk ke folder ci4 tersebut. 
 Ketik perintah berikut pada terminal untuk menjalankan:
-shell
+``shell
 $ cd ci4
 $ php spark serve
-
+``
 
 5. Perintah diatas akan menjalankan Codeigniter 4 di port 8080. Proses running akan terus berjalan sampai menekan tombol CTRL+C untuk memberhentikannya.
 Untuk melihat hasilnya, buka browser dan ketikkan alamat http://localhost:8080/.
