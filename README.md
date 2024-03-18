@@ -75,7 +75,7 @@ Melakukan konfigurasi database pada project dapat dengan melalui file `app/Confi
 ### Eror
 ## **Static Pages**
 ### **Setting Routing**
-Buka filr route yang berlokasi di `app/Config/Routes.php` yang berisi
+Buka file route yang berlokasi di `app/Config/Routes.php` yang berisi
 ```php
 <?php
 
@@ -85,6 +85,13 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
+```
+Tambahkan baris berikut, setelah arahan rute untuk '/' , untuk menyambungkan dengan `Pages.php. yang akan dibuat di Controllers
+```php
+use App\Controllers\Pages;
+
+$routes->get('pages', [Pages::class, 'index']);
+$routes->get('(:segment)', [Pages::class, 'view']);
 ```
 
 
