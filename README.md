@@ -7,3 +7,7 @@ CodeIgniter adalah sebuah framework yang dikembangkan pada tahun 2006 oleh Rick 
 CodeIgniter memiliki dua metode instalasi yang didukung: download manual, atau menggunakan Composer .
 ### **Instalasi Manual**
 ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/eb5ae87b-c8e8-4308-b3b3-f706ace19e17)
+
+![algoritm prim](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/3cd50d93-b903-4d6e-8441-8fdc4b7a1baf)
+
+
