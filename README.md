@@ -436,6 +436,11 @@ class News extends BaseController
 
 7. Tampilan
 Buka file news pada browser `localhost:8080/news`
+![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/b73fe156-8767-439d-9dd7-7256e0af972b)
+
+view artikel salah satu berita
+![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/ca89b880-57f5-4ca7-87f1-397b30ac6afd)
+
 
 
    
