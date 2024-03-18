@@ -71,12 +71,21 @@ Melakukan konfigurasi database pada project dapat dengan melalui file `app/Confi
 
    ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/b0614a45-6043-40ed-b40e-4370e29282d0) -> ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/0251a323-9ce5-49a7-844c-c880bd54c97c)
 
+# Bangun Aplikasi Pertama
+### Eror
+## **Static Pages**
+### **Setting Routing**
+Buka filr route yang berlokasi di `app/Config/Routes.php` yang berisi
+```php
+<?php
 
+use CodeIgniter\Router\RouteCollection;
 
-
-## Bangun Aplikasi Pertama
-### **Static Pages**
-
+/**
+ * @var RouteCollection $routes
+ */
+$routes->get('/', 'Home::index');
+```
 
 
 
