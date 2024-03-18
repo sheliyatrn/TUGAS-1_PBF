@@ -149,8 +149,8 @@ Header berisi kode HTML dasar yang ingin di tampilkan sebelum memuat tampilan ut
 #### **Membuat home.php & about.php**
 Tambahkan folder `pages` di `app/Views/` lalu tambahkan dua file bernama `home.php` dan `about.php` pada `app/Views/pages/`.
 
-1. File `home.php` isi kode berikut :
-```shell
+1. File `home.php` dengan kode berikut :
+```php
 <!DOCTYPE html>
 <html lang="en">
 
@@ -166,9 +166,70 @@ Tambahkan folder `pages` di `app/Views/` lalu tambahkan dua file bernama `home.p
 
 </html>
 ```
-2. File `about.php` isi kode berikut :
+2. File `about.php` dengan kode berikut :
 ```shell
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Page</title>
+</head>
+
+<body>
+    <h1>Tentang saya</h1>
+    <p>Hai semuanya. Nama saya Sheliya Triana WS, Mahasiswa Politeknik Negeri Cilacap</p>
+</body>
+
+</html>
 ```
+
+3. Lengkapi controller pages
+```shell
+<?php
+
+namespace App\Controllers;
+
+use CodeIgniter\Exceptions\PageNotFoundException; //untuk mengimpor kelas PageNotFoundException
+//CodeIgniter\Exceptions. tidak ada folder fisik yang secara langsung menampungnya di struktur proyek standar ini berasal dari default sistem ci
+
+class Pages extends BaseController
+{
+    //http://localhost:8080/pages menampilkan index() welcome_message
+    public function index()
+    {
+        // Menampilkan halaman utama (welcome_message.php)
+        return view('welcome_message');
+    }
+
+    public function view($page = 'home')
+    {
+        // ...
+
+        // Mengecek apakah halaman yang diminta ada
+        if (! is_file(APPPATH . 'Views/pages/' . $page . '.php')) {
+            // Whoops, we don't have a page for that!
+            // Jika tidak ada, lempar PageNotFoundException
+            throw new PageNotFoundException($page);
+        }
+
+        // Mengatur judul halaman berdasarkan nama halaman
+        $data['title'] = ucfirst($page); // Capitalize the first letter
+
+         // Memuat template header, halaman statis (home, about), dan footer
+        return view('templates/header', $data)
+            . view('pages/' . $page)
+            . view('templates/footer');
+    }
+}
+```
+
+### **Jalankan**
+
+1. Buka file home pada browser `localhost:8080/home`
+   
+2. Buka file about pada browser `localhost:8080/about`
+
 
 
