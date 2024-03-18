@@ -16,7 +16,7 @@ Ekstrak file .zip tersebut pada direktori root web server kita. Jika menggunakan
 4. Untuk menjalankan Codeigniter 4 kamu harus menggunakan terminal dan masuk ke folder ci4 tersebut. 
 Ketik perintah berikut pada terminal untuk menjalankan:
 ```shell
-$ cd nama-root
+$ cd ci4
 $ php spark serve
 ```
 
