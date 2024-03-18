@@ -5,6 +5,7 @@ CodeIgniter adalah sebuah framework yang dikembangkan pada tahun 2006 oleh Rick 
 
 ## Instalasi
 CodeIgniter memiliki dua metode instalasi yang didukung: download manual, atau menggunakan Composer .
+
 ### **Instalasi Manual**
 1. Download manual file CodeIgniter4 di web resminya [CodeIgniter](https://codeigniter.com/download)
    
@@ -23,6 +24,8 @@ $ php spark serve
 5. Perintah diatas akan menjalankan Codeigniter 4 di port 8080. Proses running akan terus berjalan sampai menekan tombol CTRL+C untuk memberhentikannya.
 Untuk melihat hasilnya, buka browser dan ketikkan alamat http://localhost:8080/.
 ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/ccad96a0-17a2-4b86-a115-44b151229b6f)
+
+### **Instalasi via Composer**
 
 ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/eb5ae87b-c8e8-4308-b3b3-f706ace19e17)
 
