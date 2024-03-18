@@ -228,8 +228,10 @@ class Pages extends BaseController
 ### **Jalankan**
 
 1. Buka file home pada browser `localhost:8080/home`
+   ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/4a34e442-2de1-497f-911d-722e945fcfb3)
    
 2. Buka file about pada browser `localhost:8080/about`
+   
 
 
 
