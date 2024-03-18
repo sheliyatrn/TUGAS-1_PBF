@@ -26,6 +26,12 @@ Untuk melihat hasilnya, buka browser dan ketikkan alamat http://localhost:8080/.
 ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/ccad96a0-17a2-4b86-a115-44b151229b6f)
 
 ### **Instalasi via Composer**
+1. Pastikan sudah
+Buka terminal dan arahkan ke direktori root web server yang kamu gunakan. Jika kamu menggunakan Xampp arahkan ke C:/XAMPP/htdocs. Jika kamu menggunakan Wamp Server, arahkan ke C:/Wamp/www.
+
+Atau jika kamu ingin lebih gampang, kamu bisa gunakan Git Bash.
+
+Ketikan perintah berikut untuk mendownload dan menginstal Codeigniter 4:
 
 ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/eb5ae87b-c8e8-4308-b3b3-f706ace19e17)
 
