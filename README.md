@@ -68,9 +68,7 @@ Melakukan konfigurasi database pada project dapat dengan melalui file `app/Confi
 
 1.  Ubah ke mode development
    setel `CI_ENVIRONMENT`yang defaultnya `production` ubah ke `development` dalam file **.env** untuk memanfaatkan alat debugging yang disediakan.
-   taampilan default
-   ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/b0614a45-6043-40ed-b40e-4370e29282d0)
-   setelah diubah
+   ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/b0614a45-6043-40ed-b40e-4370e29282d0) -> ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/0251a323-9ce5-49a7-844c-c880bd54c97c)
 
 
 
