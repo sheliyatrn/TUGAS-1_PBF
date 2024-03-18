@@ -21,8 +21,8 @@ $ php spark serve
 ```
 
 5. Perintah diatas akan menjalankan Codeigniter 4 di port 8080. Proses running akan terus berjalan sampai menekan tombol CTRL+C untuk memberhentikannya.
-Untuk melihat hasilnya, silahkan buka browser dan arahkan ke http://localhost:8080/.
-
+Untuk melihat hasilnya, buka browser dan ketikkan alamat http://localhost:8080/.
+![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/ccad96a0-17a2-4b86-a115-44b151229b6f)
 
 ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/eb5ae87b-c8e8-4308-b3b3-f706ace19e17)
 
