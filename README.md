@@ -15,7 +15,7 @@ Ekstrak file .zip tersebut pada direktori root web server kita. Jika menggunakan
 3. Hasil ekstrak tadi akan menghasilkan sebuah folder, silahkan rename atau ganti namanya menjadi ci4.
 
 4. Untuk menjalankan Codeigniter 4 kamu harus menggunakan terminal dan masuk ke folder ci4 tersebut. 
-Ketik perintah berikut pada terminal untuk menjalankan:
+   Ketik perintah berikut pada terminal untuk menjalankan:
 ```shell
 $ cd ci4
 $ php spark serve
@@ -28,7 +28,7 @@ Untuk melihat hasilnya, buka browser dan ketikkan alamat http://localhost:8080/.
 ### **Instalasi via Composer**
 1. Buka terminal dan arahkan ke direktori root web server yang kita gunakan ke C:/laragon/www.
 
-Ketikan perintah berikut untuk mendownload dan menginstal Codeigniter 4:
+   Ketikan perintah berikut untuk mendownload dan menginstal Codeigniter 4:
 ```shell
 $ composer create-project codeigniter4/appstarter nama-projek
 ```
@@ -36,7 +36,10 @@ $ composer create-project codeigniter4/appstarter nama-projek
 
 2. Perintah di atas akan menghasilkan sebuah project Codeigniter 4 dengan nama ci4app. Cepat atau lambatnya proses tersebut dipengaruhi oleh koneksi internet.
    
-4. 
+3. Jika proses instalasi sudah selesai, arahkan terminal ke folder ci4app tersebut. Gunakan perintah: 
+```shell
+$ php spark serve
+```
 
 
 ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/eb5ae87b-c8e8-4308-b3b3-f706ace19e17)
