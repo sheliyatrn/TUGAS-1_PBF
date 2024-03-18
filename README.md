@@ -41,6 +41,14 @@ $ composer create-project codeigniter4/appstarter nama-projek
 $ php spark serve
 ```
 
+4. Jika proses instalasi berhasil, secara otomatis Codeigniter 4 akan berjalan di port 8080. Untuk menghentikan proses, ketik CTRL+C pada terminal.
+![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/a9e8852d-bebf-4c62-bf00-8c98b5eeef1b)
+
+5. Untuk melihat hasilnya, buka browser dan arahkan ke alamat http://localhost:8080/.
+   ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/ccad96a0-17a2-4b86-a115-44b151229b6f)
+
+
+
 
 ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/eb5ae87b-c8e8-4308-b3b3-f706ace19e17)
 
