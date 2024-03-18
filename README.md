@@ -71,11 +71,11 @@ Melakukan konfigurasi database pada project dapat dengan melalui file `app/Confi
 
    ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/b0614a45-6043-40ed-b40e-4370e29282d0) -> ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/0251a323-9ce5-49a7-844c-c880bd54c97c)
 
-# Bangun Aplikasi Pertama
+## Bangun Aplikasi Pertama
 ### Eror
 
-## **Static Pages**
-### **Setting Routing**
+## Static Pages
+#### **Setting Routing**
 Buka file route yang berlokasi di `app/Config/Routes.php` yang berisi
 ```shell
 <?php
@@ -185,7 +185,7 @@ Tambahkan folder `pages` di `app/Views/` lalu tambahkan dua file bernama `home.p
 </html>
 ```
 
-3. Lengkapi controller pages
+#### **Lengkapi controller pages**
 ```shell
 <?php
 
@@ -228,10 +228,221 @@ class Pages extends BaseController
 ### **Jalankan**
 
 1. Buka file home pada browser `localhost:8080/home`
+
    ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/4a34e442-2de1-497f-911d-722e945fcfb3)
-   
 2. Buka file about pada browser `localhost:8080/about`
+
    ![image](https://github.com/sheliyatrn/TUGAS-1_PBF/assets/134477604/60c8ea4e-0c8a-4b62-8321-ccffcfa995dd)
+
+## News Section
+### **Membuat Database**
+1. Buat database dengan nama `ci4tutorial`. Kemudian buat tabel
+```shell
+CREATE TABLE news (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    title VARCHAR(128) NOT NULL,
+    slug VARCHAR(128) NOT NULL,
+    body TEXT NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE slug (slug)
+);
+```
+2. Isikan tabel tersebut
+```sql
+INSERT INTO news VALUES
+(1,'Awal Ramadhan 2024','awal-ramadhan-2024',' Kementerian Agama mengumumkan hasil sidang isbat penentuan awal puasa Ramadan 2024 setelah melakukan pemantauan bulan atau hilal di 134 titik di Indonesia pada Minggu (10/3/2024). Sidang memutuskan 1 Ramadhan 1445 Hijriah dimulai pada 12 Maret 2024.'),
+(2,'Banjir di Semarang','banjir-di-semarang','Banjir yang menerjang Kota Semarang, Jawa Tengah, menyebabkan genangan air cukup tinggi di Stasiun Poncol dan Stasiun Tawang.'),
+(3,'War Takjil','war-takjil','Baru-baru ini, media sosial diramaikan dengan fenomena berburu takjil sebelum berbuka puasa. Fenomena ini menunjukkan bahwa kegiatan mencari takjil tidak hanya dilakukan oleh umat Muslim yang sedang berpuasa, tetapi menarik perhatian umat non-Muslim.');
+```
+
+### **Membuat Koneksi Database**
+Pada file `.env` hilangkan comment (#) dan ganti database
+```php
+#--------------------------------------------------------------------
+# DATABASE
+#--------------------------------------------------------------------
+
+database.default.hostname = localhost
+database.default.database = ci4tutorial
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+```
+### **Membuat Model**
+1. Membuat NewsModel
+   Buka direktori `app/Models` dan buat file baru bernama `NewsModel.php` dan tambahkan kode berikut
+```shell
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class NewsModel extends Model
+{
+    protected $table = 'news';
+    protected $allowedFields = ['title', 'slug', 'body'];
+
+    public function getNews($slug = false)
+    {
+        if ($slug === false) {
+            return $this->findAll();
+        }
+
+        return $this->where(['slug' => $slug])->first();
+    }
+}
+```
+
+2. Tambahkan Method `NewsModel::getNews()` pada `app/Models`
+   ```shell
+  public function getNews($slug = false)
+    {
+        if ($slug === false) {
+            return $this->findAll();
+        }
+
+        return $this->where(['slug' => $slug])->first();
+    }
+   ```
+### **Menampilkan News**
+1. Menambahkan Routing
+  Ubah file `app/Config/Routes.php` , sehingga terlihat seperti berikut:
+
+```php
+<?php
+
+// ...
+
+use App\Controllers\News; // tambahkan baris ini
+use App\Controllers\Pages;
+
+$routes->get('news', [News::class, 'index']);           // tambahkan baris ini
+$routes->get('news/(:segment)', [News::class, 'show']); // tambahkan baris ini
+
+$routes->get('pages', [Pages::class, 'index']);
+$routes->get('(:segment)', [Pages::class, 'view'])
+```
+
+2. Membuat news controller
+   Buat controller baru di **`app/Controllers/News.php`** .
+
+```php
+<?php
+
+namespace App\Controllers;
+
+use App\Models\NewsModel;
+
+class News extends BaseController
+{
+    public function index()
+    {
+        $model = model(NewsModel::class);
+
+        $data['news'] = $model->getNews();
+    }
+
+    public function show($description= null)
+    {
+        $model = model(NewsModel::class);
+
+        $data['news'] = $model->getNews($description);
+    }
+}
+```
+
+3. Lengkapi Method News::index() dengan kode berikut
+   ```php
+   <?php
+
+namespace App\Controllers;
+
+use App\Models\NewsModel;
+
+class News extends BaseController
+{
+    public function index()
+    {
+        $model = model(NewsModel::class);
+
+        $data = [
+            'news'  => $model->getNews(),
+            'title' => 'News archive',
+        ];
+
+        return view('templates/header', $data)
+            . view('news/index')
+            . view('templates/footer');
+    }
+
+    // ...
+   ```
+
+4. Membuat tampilan untuk `app/Views/news/index.php`
+```php
+<h2><?= esc($title) ?></h2>
+
+<?php if (! empty($news) && is_array($news)): ?>
+
+    <?php foreach ($news as $news_item): ?>
+
+        <h3><?= esc($news_item['title']) ?></h3>
+
+        <div class="main">
+            <?= esc($news_item['body']) ?>
+        </div>
+        <p><a href="/news/<?= esc($news_item['slug'], 'url') ?>">View article</a></p>
+
+    <?php endforeach ?>
+
+<?php else: ?>
+
+    <h3>No News</h3>
+
+    <p>Unable to find any news for you.</p>
+
+<?php endif ?>
+```
+
+5. Tambahkan Method `News::show()` pada `app/controllers/News.php`
+   ```php
+ public function show($slug = null)
+    {
+        $model = model(NewsModel::class);
+
+        $data['news'] = $model->getNews($slug);
+
+        if (empty($data['news'])) {
+            throw new PageNotFoundException('Cannot find the news item: ' . $slug);
+        }
+
+        $data['title'] = $data['news']['title'];
+
+        return view('templates/header', $data)
+            . view('news/view')
+            . view('templates/footer');
+    }
+   ```
+
+6. Buat tampilan news di `app/Views/news/view.php`
+```php
+//menamplkan judul berita
+<h2><?= esc($news['title']) ?></h2>
+
+//menampilkan isi
+<p><?= esc($news['body']) ?></p>
+```
+
+7. Tampilan
+Buka file news pada browser `localhost:8080/news`
+
+
+   
+
+
+
+
    
 
 
